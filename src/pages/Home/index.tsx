@@ -1,4 +1,9 @@
+import { useState } from "react"
+
 import {
+  CoffeeContainer,
+  CoffeeContent,
+  CoffeeTitle,
   Container,
   Dashboard,
   Feature,
@@ -16,7 +21,31 @@ import timeFeature from "../../assets/dashboard/TimeFeature.svg"
 import boxFeature from "../../assets/dashboard/BoxFeature.svg"
 import coffeeFeature from "../../assets/dashboard/CoffeeFeature.svg"
 
+import { coffeesData } from "../../services/coffees"
+import { CoffeeCard } from "../../components/CoffeeCard"
+
 function Home() {
+  const [ coffees, setCoffees ] = useState(coffeesData);
+
+  function changeCoffeeCount(index: number, newCount: number) {
+    if (newCount < 0) return
+
+    setCoffees(state => {
+      const newState = state.map((item, indexItem) => {
+        if (index === indexItem) {
+          return {
+            ...item,
+            count: newCount
+          }
+        }
+
+        return item
+      })
+
+      return newState
+    })
+  }
+  
   return (
     <Container>
       <Dashboard>
@@ -54,6 +83,20 @@ function Home() {
 
         <img src={coffeeDashboard} alt="Coffee" />
       </Dashboard>
+
+      <CoffeeContainer>
+        <CoffeeTitle>
+          Nossos cafés
+        </CoffeeTitle>
+
+        <CoffeeContent>
+          {
+            coffees.map((coffee, index) => (
+              <CoffeeCard key={index} index={index} coffee={coffee} changeCoffeeCount={changeCoffeeCount} />
+            ))
+          }
+        </CoffeeContent>
+      </CoffeeContainer>
     </Container>
   )
 }

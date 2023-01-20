@@ -71,6 +71,26 @@ const Feature = styled.div`
   }
 `
 
+const CoffeeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  gap: 2rem;
+`
+
+const CoffeeTitle = styled.h2`
+  font-family: 'Baloo 2';
+  font-weight: 800;
+  font-size: 32px;
+`
+
+const CoffeeContent = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 2rem;
+`
+
 export {
   Container,
   Dashboard,
@@ -79,5 +99,8 @@ export {
   StoreInformationSubtitle,
   StoreFeaturesContainer,
   StoreFeatures,
-  Feature
+  Feature,
+  CoffeeContainer,
+  CoffeeTitle,
+  CoffeeContent
 }
