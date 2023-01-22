@@ -69,7 +69,7 @@ function CoffeeCard({ coffee, index, changeCoffeeCount }: CoffeeCardProps) {
             <img src={plusSvg} alt="plus" onClick={() => changeCoffeeCount(index, coffee.count + 1)} />
           </CoffeeCountContainer>
 
-          <CoffeeCartButton to="/cart">
+          <CoffeeCartButton to="/checkout">
             <img src={cartSvg} alt="cart" />
           </CoffeeCartButton>
         </CoffeeCountCartContainer>
