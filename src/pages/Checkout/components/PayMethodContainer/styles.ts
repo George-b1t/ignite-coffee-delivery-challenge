@@ -37,37 +37,13 @@ const Header = styled.div`
 
 const Content = styled.div`
   display: flex;
-  flex-wrap: wrap;
-
-  gap: 0.5rem;
-
-  div {
-    display: flex;
-    flex-direction: column;
-
-    gap: 0.5rem;
-  }
-
-  input {
-    padding: 12px;
-
-    background: #EEEDED;
-
-    border: 1px solid #E6E5E5;
-    border-radius: 4px;
-  }
-`
-
-const InputError = styled.p`
-  color: #DE3333;
-
-  font-size: 14px;
-  margin-left: 4px;
+  align-items: center;
+  
+  gap: 0.75rem;
 `
 
 export {
   Container,
   Header,
-  Content,
-  InputError
+  Content
 }

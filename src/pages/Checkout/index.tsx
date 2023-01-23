@@ -6,7 +6,12 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 import * as zod from "zod";
 
-import { Container } from "./styles";
+import {
+  Container,
+  LeftCheckout,
+  RightCheckout
+} from "./styles";
+import { PayMethodContainer } from './components/PayMethodContainer';
 
 const addressSchema = zod.object({
   cep: zod.string().min(8).max(8),
@@ -43,13 +48,17 @@ function Checkout() {
 
   return (
     <Container onSubmit={handleSubmit(handleCheckout)}>
-      <FormProvider {...addressForm}>
-        <AddressContainer />
-      </FormProvider>
+      <LeftCheckout>
+        <FormProvider {...addressForm}>
+          <AddressContainer />
+        </FormProvider>
 
-      <CartContainer />
+        <PayMethodContainer />
+      </LeftCheckout>
 
-      <button type="submit">clik</button>
+      <RightCheckout>
+        <CartContainer />
+      </RightCheckout>
     </Container>
   )
 }
