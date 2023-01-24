@@ -1,9 +1,12 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
   height: 104px;
 `
+
+const Logo = styled(Link)``
 
 const Content = styled.div`
   width: 100%;
@@ -39,7 +42,7 @@ const LocaleInformation = styled.div`
   }
 `
 
-const Cart = styled.div`
+const Cart = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,6 +52,8 @@ const Cart = styled.div`
   padding: 0 10px;
   border-radius: 6px;
 
+  cursor: pointer;
+
   background: #F1E9C9;
 `
 
@@ -57,5 +62,6 @@ export {
   Content,
   PurchaseInformation,
   LocaleInformation,
-  Cart
+  Cart,
+  Logo
 }

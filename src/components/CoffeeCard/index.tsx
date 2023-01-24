@@ -13,23 +13,25 @@ import {
 import plusSvg from "../../assets/coffees/card/plus.svg"
 import minusSvg from "../../assets/coffees/card/minus.svg"
 import cartSvg from "../../assets/coffees/card/cart.svg"
-
-interface Coffee {
-  name: string;
-  description: string;
-  tags: string[];
-  image: string;
-  amount: number;
-  count: number;
-}
+import { Coffee } from "../../reducers/cart/reducer";
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
 interface CoffeeCardProps {
   coffee: Coffee;
-  index: number;
-  changeCoffeeCount: (index: number, newCount: number) => void;
 }
 
-function CoffeeCard({ coffee, index, changeCoffeeCount }: CoffeeCardProps) {
+function CoffeeCard({ coffee }: CoffeeCardProps) {
+  const { addCoffee, decreaseCoffee } = useContext(CartContext);
+
+  function handleAddCoffe() {
+    addCoffee(coffee.name)
+  }
+
+  function handleDecreaseCoffee() {
+    decreaseCoffee(coffee.name)
+  }
+
   return (
     <Container>
       <img src={`/src/assets/coffees/${coffee.image}.png`} alt={coffee.image} />
@@ -64,9 +66,9 @@ function CoffeeCard({ coffee, index, changeCoffeeCount }: CoffeeCardProps) {
 
         <CoffeeCountCartContainer>
           <CoffeeCountContainer>
-            <img src={minusSvg} alt="minus" onClick={() => changeCoffeeCount(index, coffee.count - 1)} />
+            <img src={minusSvg} alt="minus" onClick={handleDecreaseCoffee} />
             <p>{coffee.count}</p>
-            <img src={plusSvg} alt="plus" onClick={() => changeCoffeeCount(index, coffee.count + 1)} />
+            <img src={plusSvg} alt="plus" onClick={handleAddCoffe} />
           </CoffeeCountContainer>
 
           <CoffeeCartButton to="/checkout">

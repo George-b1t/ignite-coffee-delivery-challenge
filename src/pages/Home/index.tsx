@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useContext } from "react"
 
 import {
   CoffeeContainer,
@@ -21,30 +21,11 @@ import timeFeature from "../../assets/dashboard/TimeFeature.svg"
 import boxFeature from "../../assets/dashboard/BoxFeature.svg"
 import coffeeFeature from "../../assets/dashboard/CoffeeFeature.svg"
 
-import { coffeesData } from "../../services/coffees"
 import { CoffeeCard } from "../../components/CoffeeCard"
+import { CartContext } from "../../context/CartContext"
 
 function Home() {
-  const [ coffees, setCoffees ] = useState(coffeesData);
-
-  function changeCoffeeCount(index: number, newCount: number) {
-    if (newCount < 0) return
-
-    setCoffees(state => {
-      const newState = state.map((item, indexItem) => {
-        if (index === indexItem) {
-          return {
-            ...item,
-            count: newCount
-          }
-        }
-
-        return item
-      })
-
-      return newState
-    })
-  }
+  const { coffees } = useContext(CartContext);
   
   return (
     <Container>
@@ -92,7 +73,7 @@ function Home() {
         <CoffeeContent>
           {
             coffees.map((coffee, index) => (
-              <CoffeeCard key={index} index={index} coffee={coffee} changeCoffeeCount={changeCoffeeCount} />
+              <CoffeeCard key={index} coffee={coffee} />
             ))
           }
         </CoffeeContent>

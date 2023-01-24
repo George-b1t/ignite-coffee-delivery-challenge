@@ -1,3 +1,6 @@
+import { useContext } from "react"
+import { CartContext } from "../../../../context/CartContext"
+import { formatValue } from "../../../../helpers/formatValue"
 import { CartItem } from "./CartItem"
 import {
   CartGeneralInformation,
@@ -8,15 +11,24 @@ import {
 } from "./styles"
 
 function CartContainer() {
+  const { coffees } = useContext(CartContext)
+
+  const filteredCoffees = coffees.filter(i => i.count > 0);
+
+  const total = filteredCoffees.reduce((a, b) => a + (b.amount * b.count) , 0);
+
   return (
     <Container>
-      <CartItem />
-      <CartItem />
+      {
+        filteredCoffees.map(coffee => (
+          <CartItem coffee={coffee} />
+        ))
+      }
 
       <CartGeneralInformation>
         <ValueInformation>
           <p>Total de itens</p>
-          <p>R$ 29,70</p>
+          <p>{formatValue(total)}</p>
         </ValueInformation>
         <ValueInformation>
           <p>Entrega</p>
@@ -24,7 +36,7 @@ function CartContainer() {
         </ValueInformation>
         <TotalValueInformation>
           <p>Total de itens</p>
-          <p>R$ 33,20</p>
+          <p>{formatValue(total + 3.5)}</p>
         </TotalValueInformation>
       </CartGeneralInformation>
 

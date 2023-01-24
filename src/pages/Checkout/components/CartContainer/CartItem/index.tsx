@@ -1,3 +1,7 @@
+import { useContext } from "react";
+import { CartContext } from "../../../../../context/CartContext";
+import { formatValue } from "../../../../../helpers/formatValue";
+import { Coffee } from "../../../../../reducers/cart/reducer";
 import {
   Container,
   Content,
@@ -13,20 +17,36 @@ import minusSvg from "/src/assets/coffees/card/minus.svg"
 import plusSvg from "/src/assets/coffees/card/plus.svg"
 import trashSvg from "/src/assets/coffees/card/trash.svg"
 
-function CartItem() {
+interface CartItemProps {
+  coffee: Coffee;
+}
+
+function CartItem({ coffee }: CartItemProps) {
+  const { addCoffee, decreaseCoffee } = useContext(CartContext);
+
+  const { name, count, amount, image } = coffee;
+
+  function handleAddCoffe() {
+    addCoffee(name)
+  }
+
+  function handleDecreaseCoffee() {
+    decreaseCoffee(name)
+  }
+
   return (
     <Container>
       <Content>
-        <img src="/src/assets/coffees/expresso_tradicional.png" alt="expresso tradicional" />
+        <img src={`/src/assets/coffees/${image}.png`} alt={name} />
         <CoffeeInfo>
           <CoffeeInfoMenu>
-            <p>Expresso Tradicional</p>
+            <p>{name}</p>
 
             <div>
               <Count>
-                <img src={minusSvg} alt="minus" />
-                  <p>{1}</p>
-                <img src={plusSvg} alt="plus" />
+                <img src={minusSvg} alt="minus" onClick={handleDecreaseCoffee} />
+                  <p>{count}</p>
+                <img src={plusSvg} alt="plus" onClick={handleAddCoffe} />
               </Count>
               <DeleteItem>
                 <img src={trashSvg} alt="trash" />
@@ -36,7 +56,7 @@ function CartItem() {
           </CoffeeInfoMenu>
 
           <CoffeeValue>
-            <p>R$ 9,90</p>
+            <p>{formatValue(amount * count)}</p>
           </CoffeeValue>
         </CoffeeInfo>
       </Content>

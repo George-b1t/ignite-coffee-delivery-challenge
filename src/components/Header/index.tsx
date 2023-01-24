@@ -1,4 +1,11 @@
-import { Cart, Container, Content, LocaleInformation, PurchaseInformation } from "./styles"
+import {
+  Logo,
+  Cart,
+  Container,
+  Content,
+  LocaleInformation,
+  PurchaseInformation
+} from "./styles"
 
 import logoSvg from "../../assets/header/Logo.svg"
 import locationSvg from "../../assets/header/Location.svg"
@@ -8,7 +15,9 @@ function Header() {
   return (
     <Container>
       <Content>
-        <img src={logoSvg} alt="logo" />
+        <Logo to="/">
+          <img src={logoSvg} alt="logo" />
+        </Logo>
 
         <PurchaseInformation>
           <LocaleInformation>
@@ -17,7 +26,7 @@ function Header() {
             <p>Porto Alegre, RS</p>
           </LocaleInformation>
 
-          <Cart>
+          <Cart to="/checkout">
             <img src={cartSvg} alt="cart" />
           </Cart>
         </PurchaseInformation>
